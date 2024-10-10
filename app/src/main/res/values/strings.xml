@@ -1,5 +1,7 @@
 <resources>
 
+    <string name="app_name">Wavve</string>
+
     <!--회원가입-->
     <string name="signup_title">이메일과 비밀번호만으로\nWavve를 즐길 수 있어요!</string>
     <string name="signup_id_warning">! 로그인, 비밀번호 찾기, 알림에 사용되니 정확한 이메일을 입력해주세요.</string>
