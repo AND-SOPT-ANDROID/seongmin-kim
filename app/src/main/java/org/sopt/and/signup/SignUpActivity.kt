@@ -1,6 +1,8 @@
 package org.sopt.and.signup
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -20,8 +22,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -30,15 +30,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.sopt.and.GlobalApplication
 import org.sopt.and.R
 import org.sopt.and.component.RoundedButton
 import org.sopt.and.component.SignTextField
 import org.sopt.and.component.Toolbar
+import org.sopt.and.signin.SigninActivity
 import org.sopt.and.ui.theme.ANDANDROIDTheme
 import org.sopt.and.ui.theme.Black
 import org.sopt.and.ui.theme.White
@@ -56,9 +63,43 @@ class SignupActivity : ComponentActivity() {
     }
 }
 
+fun isValidEmail(email: String): Boolean {
+    val emailRegex = "^[A-Za-z](.*)([@])(.+)(\\.)(.+)"
+    return email.matches(emailRegex.toRegex())
+}
+
+fun isValidPwd(pwd: String): Boolean {
+    if (pwd.length !in 8..20) return false
+
+    var upperCase = false
+    var lowerCase = false
+    var num = false
+    var specialChar = false
+
+    pwd.forEach {
+        when {
+            it.isUpperCase() -> upperCase = true
+            it.isLowerCase() -> lowerCase = true
+            it.isDigit() -> num = true
+            "!@#\$%^&*()_+-=[]{}|;:'\",.<>?/~`".contains(it) -> specialChar = true
+        }
+    }
+
+    val validCheck = listOf(upperCase, lowerCase, num, specialChar).count { it }
+
+    return validCheck >= 3
+}
+
+fun login(email: String, pwd: String) : Boolean {
+    return isValidEmail(email) && isValidPwd(pwd)
+}
+
 @Composable
 fun SignUpScreen() {
     val email = remember { mutableStateOf("") }
+    val pwd = remember { mutableStateOf("") }
+    val isPwdVisible = remember { mutableStateOf(false) }
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -93,11 +134,12 @@ fun SignUpScreen() {
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 20.dp)
         )
+
+        // Email 입력
         SignTextField(
             value = email.value,
-            onValueChange = { newValue ->
-                email.value = newValue  // 입력된 값으로 상태 업데이트
-            },
+            onValueChange = { newValue -> email.value = newValue },
+            isPwdVisible = true,
             placeholder = stringResource(R.string.signup_id_placeholder),
             modifier = Modifier.padding(10.dp)
         )
@@ -107,13 +149,17 @@ fun SignUpScreen() {
             fontSize = 14.sp,
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp)
         )
+
+        // Password 입력
         SignTextField(
-            value = email.value,
-            onValueChange = { newValue ->
-                email.value = newValue  // 입력된 값으로 상태 업데이트
-            },
-            placeholder = stringResource(R.string.signup_id_placeholder),
-            modifier = Modifier.padding(10.dp)
+            value = pwd.value,
+            onValueChange = { newValue -> pwd.value = newValue },
+            placeholder = stringResource(R.string.signup_pwd_placeholder),
+            modifier = Modifier.padding(10.dp),
+            isPwdVisible = isPwdVisible.value,
+            onPwdVisibilityChange = {
+                isPwdVisible.value = !isPwdVisible.value
+            }
         )
         Text(
             color = White,
@@ -164,9 +210,26 @@ fun SignUpScreen() {
 
         Spacer(modifier = Modifier.weight(1f))
 
+        // 회원가입 버튼
         RoundedButton(
             content = stringResource(R.string.signup),
-            onClick = {}
+            onClick = {
+                if(login(email.value, pwd.value)) {
+                    val dataStore = GlobalApplication.getInstance().getDataStore()
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        dataStore.saveEmail(email.value)
+                        dataStore.savePwd(pwd.value)
+
+                        withContext(Dispatchers.Main) {
+                            val intent = Intent(context, SigninActivity::class.java)
+                            context.startActivity(intent)
+                        }
+                    }
+                } else {
+                    Toast.makeText(context,"잘못된 형식입니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
         )
     }
 }
