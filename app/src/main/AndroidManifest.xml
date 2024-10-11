@@ -19,7 +19,7 @@
             android:theme="@style/Theme.ANDANDROID" />
         <activity
             android:name=".signup.SignupActivity"
-            android:exported="true1"
+            android:exported="true"
             android:label="SignupActivity"
             android:theme="@style/Theme.ANDANDROID" >
             <intent-filter>
