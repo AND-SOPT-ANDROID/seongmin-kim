@@ -13,6 +13,21 @@
         android:theme="@style/Theme.ANDANDROID"
         tools:targetApi="31">
         <activity
+            android:name=".mypage.MyPageActivity"
+            android:exported="false"
+            android:label="MyPageActivity"
+            android:theme="@style/Theme.ANDANDROID" />
+        <activity
+            android:name=".signup.SignupActivity"
+            android:exported="false"
+            android:label="SignupActivity"
+            android:theme="@style/Theme.ANDANDROID" />
+        <activity
+            android:name=".signin.SigninActivity"
+            android:exported="false"
+            android:label="SigninActivity"
+            android:theme="@style/Theme.ANDANDROID" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
