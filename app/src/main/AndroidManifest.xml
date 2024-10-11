@@ -7,22 +7,38 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
+        android:name=".GlobalApplication"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ANDANDROID"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".mypage.MyPageActivity"
+            android:exported="false"
+            android:label="MyPageActivity"
+            android:theme="@style/Theme.ANDANDROID" />
+        <activity
+            android:name=".signup.SignupActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.ANDANDROID">
+            android:label="SignupActivity"
+            android:theme="@style/Theme.ANDANDROID" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".signin.SigninActivity"
+            android:exported="false"
+            android:label="SigninActivity"
+            android:theme="@style/Theme.ANDANDROID" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.ANDANDROID"/>
     </application>
 
 </manifest>
