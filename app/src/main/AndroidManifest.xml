@@ -19,9 +19,15 @@
             android:theme="@style/Theme.ANDANDROID" />
         <activity
             android:name=".signup.SignupActivity"
-            android:exported="false"
+            android:exported="true1"
             android:label="SignupActivity"
-            android:theme="@style/Theme.ANDANDROID" />
+            android:theme="@style/Theme.ANDANDROID" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".signin.SigninActivity"
             android:exported="false"
@@ -29,15 +35,9 @@
             android:theme="@style/Theme.ANDANDROID" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/app_name"
-            android:theme="@style/Theme.ANDANDROID">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.ANDANDROID"/>
     </application>
 
 </manifest>
