@@ -1,5 +1,6 @@
 package org.sopt.and.signup
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -222,8 +223,13 @@ fun SignUpScreen() {
                         dataStore.savePwd(pwd.value)
 
                         withContext(Dispatchers.Main) {
-                            val intent = Intent(context, SigninActivity::class.java)
-                            context.startActivity(intent)
+                            val resultIntent = Intent().apply {
+                                putExtra("email", email.value)
+                                putExtra("pwd", pwd.value)
+                            }
+
+                            (context as? Activity)?.setResult(Activity.RESULT_OK, resultIntent)
+                            (context as? Activity)?.finish()
                         }
                     }
                 } else {
