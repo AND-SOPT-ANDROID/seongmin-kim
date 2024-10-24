@@ -12,7 +12,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.sopt.and.presentation.screen.SignInScreen
+import org.sopt.and.presentation.screen.SignUpScreen
 import org.sopt.and.presentation.viewmodel.SignInViewModel
+import org.sopt.and.presentation.viewmodel.SignUpViewModel
 
 @Composable
 fun Navigation(
@@ -31,6 +33,7 @@ fun Navigation(
                SignInScreen(
                    navigateUp = { navController.popBackStack() },
                    navigateSignUp = { navController.navigate(AppRoutes.SignUpScreen) },
+                   navigateMyPage = {},
                    signInEmail = signInViewModel.signInState.collectAsState().value.email,
                    signInPwd = signInViewModel.signInState.collectAsState().value.password,
                    onEmailChange = { signInViewModel.setSignInEmail(it) },
@@ -38,15 +41,26 @@ fun Navigation(
                    isPwdVisibility = signInViewModel.signInState.collectAsState().value.isPassWordVisibility,
                    isPwdVisible = { signInViewModel.togglePasswordVisibility() },
                    isLogin = { signInEmail, signInPwd -> signInViewModel.login() },
+                   signInSuccess = signInViewModel.isSignInSuccess.collectAsState().value,
                    snackbarHostState = remember { SnackbarHostState() }
                )
            }
 
-//           composable<AppRoutes.SignUpScreen> {
-//               SignUpScreen(
-//
-//               )
-//           }
+           composable(AppRoutes.SignUpScreen) {
+               val signUpViewModel: SignUpViewModel = viewModel()
+               SignUpScreen(
+                   navigateUp = { navController.popBackStack() },
+                   navigateSignIn = { navController.navigate(AppRoutes.SignInScreen) },
+                   signUpEmail = signUpViewModel.signUpState.collectAsState().value.email,
+                   signUpPwd = signUpViewModel.signUpState.collectAsState().value.password,
+                   onEmailChange = { signUpViewModel.setSignUpEmail(it) },
+                   onPwdChange  = { signUpViewModel.setSignUpPwd(it) },
+                   isPwdVisibility = signUpViewModel.signUpState.collectAsState().value.isPassWordVisibility,
+                   isPwdVisible = { signUpViewModel.togglePasswordVisibility() },
+                   isSignUp = { signUpEmail, signUpPwd -> signUpViewModel.signUp() },
+                   signUpSuccess = signUpViewModel.isSignUpSuccess.collectAsState().value
+               )
+           }
        }
    }
 
