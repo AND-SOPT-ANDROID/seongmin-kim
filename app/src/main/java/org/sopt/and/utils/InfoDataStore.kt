@@ -1,4 +1,4 @@
-package org.sopt.and.ui.theme
+package org.sopt.and.utils
 
 import android.content.Context
 import androidx.datastore.core.DataStore

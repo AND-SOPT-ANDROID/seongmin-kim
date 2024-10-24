@@ -1,7 +1,7 @@
 package org.sopt.and
 
 import android.app.Application
-import org.sopt.and.ui.theme.InfoDataStore
+import org.sopt.and.utils.InfoDataStore
 
 class GlobalApplication: Application() {
     private lateinit var dataStore: InfoDataStore
