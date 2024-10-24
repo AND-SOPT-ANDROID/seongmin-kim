@@ -1,4 +1,4 @@
-package org.sopt.and.signin
+package org.sopt.and.presentation.screen
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -48,11 +47,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.sopt.and.GlobalApplication
 import org.sopt.and.R
-import org.sopt.and.component.RoundedButton
-import org.sopt.and.component.SignTextField
-import org.sopt.and.component.Toolbar
-import org.sopt.and.mypage.MyPageActivity
-import org.sopt.and.signup.SignupActivity
+import org.sopt.and.presentation.component.RoundedButton
+import org.sopt.and.presentation.component.SignTextField
+import org.sopt.and.presentation.component.Toolbar
 import org.sopt.and.ui.theme.ANDANDROIDTheme
 import org.sopt.and.ui.theme.Black
 import org.sopt.and.ui.theme.White

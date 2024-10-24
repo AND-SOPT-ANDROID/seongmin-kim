@@ -1,4 +1,4 @@
-package org.sopt.and.signup
+package org.sopt.and.presentation.screen
 
 import android.content.Intent
 import android.os.Bundle
@@ -42,10 +42,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.sopt.and.GlobalApplication
 import org.sopt.and.R
-import org.sopt.and.component.RoundedButton
-import org.sopt.and.component.SignTextField
-import org.sopt.and.component.Toolbar
-import org.sopt.and.signin.SigninActivity
+import org.sopt.and.presentation.component.RoundedButton
+import org.sopt.and.presentation.component.SignTextField
+import org.sopt.and.presentation.component.Toolbar
 import org.sopt.and.ui.theme.ANDANDROIDTheme
 import org.sopt.and.ui.theme.Black
 import org.sopt.and.ui.theme.White

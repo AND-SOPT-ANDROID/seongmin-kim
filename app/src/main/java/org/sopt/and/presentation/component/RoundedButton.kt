@@ -1,4 +1,4 @@
-package org.sopt.and.component
+package org.sopt.and.presentation.component
 
 import android.graphics.Color
 import androidx.compose.foundation.background

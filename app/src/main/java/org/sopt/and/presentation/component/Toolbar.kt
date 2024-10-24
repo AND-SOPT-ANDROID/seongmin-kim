@@ -1,4 +1,4 @@
-package org.sopt.and.component
+package org.sopt.and.presentation.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

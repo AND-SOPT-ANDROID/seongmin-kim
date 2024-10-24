@@ -1,4 +1,4 @@
-package org.sopt.and.mypage
+package org.sopt.and.presentation.screen
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
