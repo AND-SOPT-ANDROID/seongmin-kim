@@ -1,5 +1,6 @@
 package org.sopt.and.presentation.screen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,6 +24,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -41,6 +43,7 @@ import org.sopt.and.ui.theme.White
 fun SignInScreen(
     navigateUp: () -> Unit,
     navigateSignUp: () -> Unit,
+    navigateMyPage: () -> Unit,
 //    signUpEmail: String,
 //    signUpPwd: String,
     signInEmail: String,
@@ -50,6 +53,7 @@ fun SignInScreen(
     isPwdVisibility: Boolean,
     isPwdVisible: () -> Unit,
     isLogin: (String, String) -> Unit,
+    signInSuccess: Boolean,
     snackbarHostState: SnackbarHostState
 ) {
     Scaffold(
@@ -86,7 +90,7 @@ fun SignInScreen(
             SignTextField(
                 value = signInEmail,
                 onValueChange = onEmailChange,
-                isPwdVisible = false,  // 이메일은 false로 고정
+                isPwdVisible = true,
                 placeholder = stringResource(R.string.id_placeholder),
                 modifier = Modifier.padding(10.dp)
             )
@@ -105,7 +109,7 @@ fun SignInScreen(
             RoundedButton(
                 content = stringResource(R.string.signin),
                 onClick = {
-                    isLogin(signInEmail, signInPwd) // 로그인
+                    isLogin(signInEmail, signInPwd)
                 }
             )
 
@@ -173,8 +177,17 @@ fun SignInScreen(
         }
     }
 
+    // 로그인 성공 시 화면 전환
+    if (signInSuccess) {
+        LaunchedEffect(Unit) {
+            Log.d("로그","로그인 성공")
+            //navigateMyPage() // 로그인 성공 시 홈 화면으로 이동
+        }
+    }
+
 //    // ViewModel에서 저장된 로그인 정보를 불러오기
 //    LaunchedEffect(Unit) {
 //        viewModel.loadSignInInfo()
 //    }
+
 }

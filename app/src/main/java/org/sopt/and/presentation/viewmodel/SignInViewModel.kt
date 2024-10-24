@@ -1,5 +1,6 @@
 package org.sopt.and.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +18,10 @@ class SignInViewModel : ViewModel() {
     val signInState: StateFlow<SignInState>
         get() = _signInState.asStateFlow()
 
+    private val _isSignInSuccess = MutableStateFlow(false) // 로그인 성공 여부
+    val isSignInSuccess: StateFlow<Boolean>
+        get() = _isSignInSuccess.asStateFlow()
+
     private val _loginStatusMessage = MutableStateFlow("")
     val loginStatusMessage: StateFlow<String> = _loginStatusMessage
 
@@ -30,10 +35,18 @@ class SignInViewModel : ViewModel() {
 
             val isLoginSuccess = (savedEmail == _signInState.value.email) &&
                     (savedPassword == _signInState.value.password)
+            Log.d("로그","isLoginSuccess $isLoginSuccess")
+            Log.d("로그","savedEmail $savedEmail")
+            Log.d("로그","savedPassword $savedPassword")
+            Log.d("로그","_signInState.value.email ${_signInState.value.email}")
+            Log.d("로그","_signInState.value.password ${_signInState.value.password}")
 
-            _signInState.value = _signInState.value.copy(
-                loginStatus = isLoginSuccess
-            )
+            if(isLoginSuccess) {
+                _signInState.value = _signInState.value.copy(loginStatus = isLoginSuccess)
+                _isSignInSuccess.value = isLoginSuccess
+            } else {
+                _isSignInSuccess.value = !isLoginSuccess
+            }
         }
     }
 
