@@ -180,8 +180,7 @@ fun SignInScreen(
     // 로그인 성공 시 화면 전환
     if (signInSuccess) {
         LaunchedEffect(Unit) {
-            Log.d("로그","로그인 성공")
-            //navigateMyPage() // 로그인 성공 시 홈 화면으로 이동
+            navigateMyPage() // 로그인 성공 시 마이페이지 화면으로 이동
         }
     }
 
