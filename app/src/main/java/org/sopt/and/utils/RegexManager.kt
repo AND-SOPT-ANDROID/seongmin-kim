@@ -1,6 +1,6 @@
 package org.sopt.and.utils
 
 object RegexManager {
-    val emailRegex = Regex("^[A-Za-z](.*)([@])(.+)(\\.)(.+)")
-    val passwordRegex = Regex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+    val emailRegex = Regex("[0-9a-zA-Z]+(.[_a-z0-9-]+)*@(?:\\\\w+\\\\.)+\\\\w+\$")
+    val specialCharRegex = Regex("[!@#\$%^&*()_+\\-=[\\]{}|;:'\",.<>?/~`]")
 }
