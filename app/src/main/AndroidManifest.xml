@@ -14,17 +14,17 @@
         android:theme="@style/Theme.ANDANDROID"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.screen.MyPageActivity"
+            android:name=".presentation.screen.mypage.MyPageActivity"
             android:exported="false"
             android:label="MyPageActivity"
             android:theme="@style/Theme.ANDANDROID" />
         <activity
-            android:name=".presentation.screen.SignupActivity"
+            android:name=".presentation.screen.signup.SignupActivity"
             android:exported="false"
             android:label="SignupActivity"
             android:theme="@style/Theme.ANDANDROID" />
         <activity
-            android:name=".presentation.screen.SigninActivity"
+            android:name=".presentation.screen.signin.SigninActivity"
             android:exported="false"
             android:label="SigninActivity"
             android:theme="@style/Theme.ANDANDROID" />

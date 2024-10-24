@@ -12,9 +12,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import org.sopt.and.presentation.screen.MyPageScreen
-import org.sopt.and.presentation.screen.SignInScreen
-import org.sopt.and.presentation.screen.SignUpScreen
+import org.sopt.and.presentation.screen.mypage.MyPageScreen
+import org.sopt.and.presentation.screen.signin.SignInScreen
+import org.sopt.and.presentation.screen.signup.SignUpScreen
 import org.sopt.and.presentation.viewmodel.SignInViewModel
 import org.sopt.and.presentation.viewmodel.SignUpViewModel
 

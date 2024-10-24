@@ -1,4 +1,4 @@
-package org.sopt.and.presentation.screen
+package org.sopt.and.presentation.screen.signup
 
 import android.util.Log
 import androidx.compose.foundation.Image

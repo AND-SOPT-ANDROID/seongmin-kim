@@ -1,4 +1,4 @@
-package org.sopt.and.presentation.screen
+package org.sopt.and.presentation.screen.mypage
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
