@@ -12,4 +12,10 @@ sealed interface Routes {
     @Serializable
     data class MyPageScreen(val email: String) : Routes
 
+    @Serializable
+    data object HomeScreen : Routes
+
+    @Serializable
+    data object SearchScreen : Routes
+
 }
