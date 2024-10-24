@@ -11,6 +11,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import org.sopt.and.presentation.screen.MyPageScreen
 import org.sopt.and.presentation.screen.SignInScreen
 import org.sopt.and.presentation.screen.SignUpScreen
 import org.sopt.and.presentation.viewmodel.SignInViewModel
@@ -26,15 +28,16 @@ fun Navigation(
        val navController = rememberNavController()
        NavHost(
            navController = navController,
-           startDestination = AppRoutes.SignInScreen
+           startDestination = Routes.SignInScreen
        ) {
-           composable(AppRoutes.SignInScreen) {
+           composable<Routes.SignInScreen> {
                val signInViewModel: SignInViewModel = viewModel()
+               val signInEmail = signInViewModel.signInState.collectAsState().value.email
                SignInScreen(
                    navigateUp = { navController.popBackStack() },
-                   navigateSignUp = { navController.navigate(AppRoutes.SignUpScreen) },
-                   navigateMyPage = {},
-                   signInEmail = signInViewModel.signInState.collectAsState().value.email,
+                   navigateSignUp = { navController.navigate(Routes.SignUpScreen) },
+                   navigateMyPage = {navController.navigate(Routes.MyPageScreen(signInEmail))},
+                   signInEmail = signInEmail,
                    signInPwd = signInViewModel.signInState.collectAsState().value.password,
                    onEmailChange = { signInViewModel.setSignInEmail(it) },
                    onPwdChange  = { signInViewModel.setSignInPwd(it) },
@@ -46,11 +49,11 @@ fun Navigation(
                )
            }
 
-           composable(AppRoutes.SignUpScreen) {
+           composable<Routes.SignUpScreen> {
                val signUpViewModel: SignUpViewModel = viewModel()
                SignUpScreen(
                    navigateUp = { navController.popBackStack() },
-                   navigateSignIn = { navController.navigate(AppRoutes.SignInScreen) },
+                   navigateSignIn = { navController.navigate(Routes.SignInScreen) },
                    signUpEmail = signUpViewModel.signUpState.collectAsState().value.email,
                    signUpPwd = signUpViewModel.signUpState.collectAsState().value.password,
                    onEmailChange = { signUpViewModel.setSignUpEmail(it) },
@@ -59,6 +62,13 @@ fun Navigation(
                    isPwdVisible = { signUpViewModel.togglePasswordVisibility() },
                    isSignUp = { signUpEmail, signUpPwd -> signUpViewModel.signUp() },
                    signUpSuccess = signUpViewModel.isSignUpSuccess.collectAsState().value
+               )
+           }
+
+           composable<Routes.MyPageScreen> {
+               val args = it.toRoute<Routes.MyPageScreen>()
+               MyPageScreen(
+                   email = args.email
                )
            }
        }
