@@ -1,4 +1,4 @@
-package org.sopt.and
+package org.sopt.and.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
