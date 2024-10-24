@@ -25,20 +25,20 @@
             android:theme="@style/Theme.ANDANDROID" />
         <activity
             android:name=".presentation.screen.SigninActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="SigninActivity"
-            android:theme="@style/Theme.ANDANDROID" >
+            android:theme="@style/Theme.ANDANDROID" />
+        <activity
+            android:name=".presentation.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.ANDANDROID">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.MainActivity"
-            android:exported="false"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.ANDANDROID"/>
     </application>
 
 </manifest>
