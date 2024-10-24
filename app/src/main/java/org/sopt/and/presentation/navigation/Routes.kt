@@ -3,19 +3,31 @@ package org.sopt.and.presentation.navigation
 import kotlinx.serialization.Serializable
 
 sealed interface Routes {
-    @Serializable
-    data object SignInScreen : Routes
+    val route: String
 
     @Serializable
-    data object SignUpScreen : Routes
+    data object SignInScreen : Routes {
+        override val route = "sign_in"
+    }
 
     @Serializable
-    data class MyPageScreen(val email: String) : Routes
+    data object SignUpScreen : Routes {
+        override val route = "sign_up"
+    }
 
     @Serializable
-    data object HomeScreen : Routes
+    data object MyPageScreen : Routes {
+        override val route = "my_page"
+    }
 
     @Serializable
-    data object SearchScreen : Routes
+    data object HomeScreen : Routes {
+        override val route = "home"
+    }
+
+    @Serializable
+    data object SearchScreen : Routes {
+        override val route = "search"
+    }
 
 }
