@@ -1,5 +1,6 @@
 package org.sopt.and.mypage
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,8 +14,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Icon
@@ -23,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -43,7 +48,7 @@ class MyPageActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ANDANDROIDTheme {
-
+                MyViewScreen()
             }
         }
     }
@@ -51,13 +56,19 @@ class MyPageActivity : ComponentActivity() {
 
 @Composable
 fun MyViewScreen() {
+
+    val context = LocalContext.current
+    val email = (context as? Activity)?.intent?.getStringExtra("email") ?: stringResource(R.string.signup_id_placeholder)
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Black)
+            .statusBarsPadding()
+            .navigationBarsPadding()
+            .imePadding(),
     ) {
-
-        Column (
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = PurpleGrey40)
@@ -77,7 +88,7 @@ fun MyViewScreen() {
                         .size(48.dp)
                 )
                 Text(
-                    text = stringResource(R.string.signup_id_placeholder),
+                    text = email,
                     style = TextStyle(
                         color = White,
                         fontSize = 18.sp
@@ -134,7 +145,13 @@ fun MyViewScreen() {
         Spacer(modifier = Modifier.height(32.dp))
 
         Column(modifier = Modifier.fillMaxWidth()) {
-            Text(text = "전체 시청내역", color = White, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            Text(
+                text = "전체 시청내역",
+                color = White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                modifier = Modifier.padding(start = 8.dp)
+            )
             Spacer(modifier = Modifier.height(8.dp))
             Box(
                 modifier = Modifier
@@ -143,14 +160,25 @@ fun MyViewScreen() {
                 contentAlignment = Alignment.Center
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(painter = painterResource(id = R.drawable.ic_error_gray_24), contentDescription = "No Watch History", tint = Gray, modifier = Modifier.size(50.dp))
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_error_gray_24),
+                        contentDescription = "No Watch History",
+                        tint = Gray,
+                        modifier = Modifier.size(50.dp)
+                    )
                     Text(text = "시청내역이 없어요.", color = Gray, fontSize = 14.sp)
                 }
             }
         }
 
         Column(modifier = Modifier.fillMaxWidth()) {
-            Text(text = "관심 프로그램", color = White, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            Text(
+                text = "관심 프로그램",
+                color = White,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                modifier = Modifier.padding(start = 8.dp)
+            )
             Spacer(modifier = Modifier.height(8.dp))
             Box(
                 modifier = Modifier
@@ -159,7 +187,12 @@ fun MyViewScreen() {
                 contentAlignment = Alignment.Center
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(painter = painterResource(id = R.drawable.ic_error_gray_24), contentDescription = "No Interest Program", tint = Gray, modifier = Modifier.size(50.dp))
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_error_gray_24),
+                        contentDescription = "No Interest Program",
+                        tint = Gray,
+                        modifier = Modifier.size(50.dp)
+                    )
                     Text(text = "관심 프로그램이 없어요.", color = Gray, fontSize = 14.sp)
                 }
             }
